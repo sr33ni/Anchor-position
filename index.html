@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: grid;
+      place-items: center;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      grid-template-columns: 1fr 1fr;
+    }
+    .card {
+      background-color: white;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      width: 90%;
+      max-width: 400px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .hover-element {
+      overflow: hidden;
+      h4 {
+        anchor-name: --relative;
+        display: inline-block;
+        cursor: pointer;
+        + p {
+          display: none;
+          position: absolute;
+          position-anchor: --relative;
+          bottom: calc(anchor(bottom) + 20px);
+          right: anchor(end);
+          color: white;
+          background-color:rgba(0, 0, 0, 0.5);
+          border-radius: 1rem;
+          padding: 1.2rem;
+          max-width: 300px;
+          box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+          font-size: 0.95rem;
+          line-height: 1.5;
+          animation: slideUp 0.3s ease;
+          filter: drop-shadow(2px 4px 6px black);
+        }
+        &:hover {
+          color: #764ba2;
+          + p {
+            display: block;
+          }
+        }
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    pre {
+      background-color: #2d2d2d;
+      color: #f8f8f2;
+      padding: 1rem;
+      border-radius: 1rem;
+      margin-top: 2rem;
+      overflow-x: auto;
+      width: 90%;
+      max-width: 800px;
+    }
+  </style>
+  <body>
+    <div class="card">
+      <p>
+        Anchor positioning is an alternative to position: relative. It links
+        elements via anchor-name and position-anchor. Use anchor() for placement
+        (e.g. bottom + 20px, right at start). Unaffected by overflow.
+      </p>
+      <div class="hover-element">
+        <h4>✨ Hover me</h4>
+        <p>
+          Not impacted by ancestor container overflow rules or clipping
+          behavior.
+        </p>
+      </div>
+    </div>
+
+    <pre><code>
+    .hover-element {
+      overflow: hidden;
+      h4 {
+        anchor-name: --relative;
+        display: inline-block;
+        cursor: pointer;
+        + p {
+          display: none;
+          position: absolute;
+          position-anchor: --relative;
+          bottom: calc(anchor(bottom) + 20px);
+          right: anchor(end);
+        }
+        &:hover {
+          + p {
+            display: block;
+          }
+        }
+      }
+    }
+
+</code></pre>
+  </body>
+</html>
